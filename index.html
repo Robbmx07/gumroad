@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>robbmx — PC-DMIS resources built on the floor</title>
+<style>
+  :root{
+    --paper:#F7F6F3;
+    --panel:#FFFFFF;
+    --ink:#1B222B;
+    --ink-soft:#4B5563;
+    --line:#DEE2E5;
+    --steel:#2B5B84;
+    --steel-dark:#1F435F;
+    --steel-tint:#E9F0F6;
+    --caution:#9A5A19;
+    --caution-bg:#FBF0E1;
+    --mono: "Liberation Mono","SFMono-Regular",Consolas,"Courier New",monospace;
+    --sans: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#14181D;
+      --panel:#1B2129;
+      --ink:#EDEFF2;
+      --ink-soft:#9AA3AD;
+      --line:#2B333C;
+      --steel:#6FA3D1;
+      --steel-dark:#8FBBE0;
+      --steel-tint:#1E2C38;
+      --caution:#E2A868;
+      --caution-bg:#2E2416;
+    }
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+  }
+  a{color:inherit;}
+  .wrap{max-width:920px;margin:0 auto;padding:0 24px;}
+
+  /* Header */
+  header.top{border-bottom:2px solid var(--ink);padding:28px 0 20px;}
+  .brandrow{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+  .wordmark{font-family:var(--mono);font-size:15px;font-weight:700;letter-spacing:.02em;color:var(--ink);}
+  .wordmark span{color:var(--steel);}
+  .kicker{font-family:var(--mono);font-size:11.5px;color:var(--steel);letter-spacing:.04em;margin:0;}
+
+  /* Hero */
+  .hero{padding:56px 0 44px;}
+  .hero h1{font-size:clamp(28px,4.4vw,42px);line-height:1.15;font-weight:700;letter-spacing:-0.01em;margin:0 0 16px;max-width:18ch;}
+  .hero p{font-size:16.5px;color:var(--ink-soft);max-width:56ch;margin:0;}
+
+  /* Section shared */
+  section{padding:40px 0;border-top:1px solid var(--line);}
+  .section-label{font-family:var(--mono);font-size:11.5px;color:var(--steel);letter-spacing:.04em;margin:0 0 6px;}
+  section h2{font-size:22px;font-weight:700;margin:0 0 8px;}
+  section > p.lede{color:var(--ink-soft);font-size:14.5px;max-width:60ch;margin:0 0 28px;}
+
+  /* Product cards */
+  .products{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  @media (max-width:680px){ .products{grid-template-columns:1fr;} }
+  .card{border:1px solid var(--line);background:var(--panel);border-radius:6px;padding:22px 22px 20px;
+    display:flex;flex-direction:column;gap:10px;transition:border-color .15s ease;}
+  .card:hover{border-color:var(--steel);}
+  .card .price{font-family:var(--mono);font-size:13px;color:var(--steel);font-weight:700;}
+  .card h3{font-size:17px;margin:0;line-height:1.35;}
+  .card p{font-size:13.5px;color:var(--ink-soft);margin:0;flex:1;}
+  .card .cta{font-size:13px;font-weight:600;color:var(--steel);text-decoration:none;margin-top:6px;
+    display:inline-flex;align-items:center;gap:5px;}
+  .card .cta:hover{color:var(--steel-dark);}
+  .card a.wrapcard{text-decoration:none;display:contents;}
+
+  /* About */
+  .about p{font-size:14.5px;color:var(--ink-soft);max-width:64ch;margin:0 0 12px;}
+  .about p:last-child{margin-bottom:0;}
+  .about strong{color:var(--ink);}
+
+  /* Watch-style callout, reused from the product branding */
+  .note{margin-top:18px;background:var(--caution-bg);border:1px solid var(--caution);border-left:3px solid var(--caution);
+    border-radius:0 4px 4px 0;padding:10px 14px;font-size:13px;color:var(--caution);max-width:60ch;}
+  .note b{font-family:var(--mono);font-size:11px;letter-spacing:.02em;margin-right:6px;}
+
+  /* Follow form */
+  .followbox{border:1px solid var(--line);background:var(--panel);border-radius:6px;padding:26px 24px;}
+  .followbox h2{margin-bottom:6px;}
+  form[data-gumroad-follow]{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;}
+  form[data-gumroad-follow] input[type="email"]{
+    flex:1;min-width:220px;padding:11px 14px;border:1px solid var(--line);border-radius:4px;
+    background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:14px;
+  }
+  form[data-gumroad-follow] input[type="email"]:focus{outline:2px solid var(--steel);outline-offset:1px;}
+  form[data-gumroad-follow] button{
+    font-family:var(--sans);font-size:14px;font-weight:600;color:#fff;background:var(--steel);
+    border:none;padding:11px 20px;border-radius:4px;cursor:pointer;
+  }
+  form[data-gumroad-follow] button:hover{background:var(--steel-dark);}
+  [data-gumroad-follow-message]{font-size:13px;color:var(--ink-soft);margin-top:10px;}
+
+  /* Footer */
+  footer{padding:30px 0 50px;border-top:1px solid var(--line);}
+  footer p{font-size:12.5px;color:var(--ink-soft);margin:0;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brandrow">
+      <div class="wordmark">robb<span>mx</span></div>
+    </div>
+  </header>
+
+  <section class="hero" style="border-top:none;padding-top:44px;">
+    <p class="kicker">CMM PROGRAMMING · PC-DMIS</p>
+    <h1>Practical PC-DMIS resources, built on the floor.</h1>
+    <p>I program CMMs for aerospace and medical-device inspection. These are the references and checklists I actually use — written for working programmers, not as a menu tour of the software.</p>
+  </section>
+
+  <section>
+    <p class="section-label">RESOURCES</p>
+    <h2>Guides &amp; tools</h2>
+    <p class="lede">Two things, sold separately or together: the concepts, and the process.</p>
+
+    <div class="products">
+      <div class="card">
+        <span class="price">$29</span>
+        <h3>PC-DMIS Field Reference</h3>
+        <p>Feature logic, vector direction, alignment sequencing, and GD&amp;T structuring — the concepts that cause the most rework on the floor.</p>
+        <a class="cta" href="https://robbmx.gumroad.com/l/tbvxyc">View the reference guide →</a>
+      </div>
+      <div class="card">
+        <span class="price">$19</span>
+        <h3>CMM Build Sequence Checklist</h3>
+        <p>An interactive 65-step, 16-phase order of operations — from naming the program to closing the tolerance.</p>
+        <a class="cta" href="https://robbmx.gumroad.com/l/ytdkzh">View the checklist →</a>
+      </div>
+    </div>
+
+    <div class="note"><b>NOTE</b>Both are single-file downloads — no install, no account, work offline.</div>
+  </section>
+
+  <section class="about">
+    <p class="section-label">ABOUT</p>
+    <h2>Why these exist</h2>
+    <p>I kept re-explaining the same handful of things — why a vector flipped, why an alignment doesn't hold — to whoever was newest on the floor. Writing it down once seemed more useful than doing it from memory every time.</p>
+    <p><strong>No fluff, no menu screenshots.</strong> Just the logic underneath the software, from someone who runs it daily.</p>
+  </section>
+
+  <section>
+    <div class="followbox">
+      <p class="section-label">STAY IN THE LOOP</p>
+      <h2>Get notified about new resources</h2>
+      <p class="lede" style="margin-bottom:0;">Occasional email when something new goes up. No spam.</p>
+      <form data-gumroad-follow="https://robbmx.gumroad.com">
+        <input type="email" name="email" placeholder="you@example.com" required aria-label="Email address">
+        <button type="submit">Notify me</button>
+      </form>
+      <div data-gumroad-follow-message></div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© robbmx · CMM programming resources</p>
+  </footer>
+
+</div>
+<script src="https://gumroad.com/js/gumroad.js"></script>
+</body>
+</html>
